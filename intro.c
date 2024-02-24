@@ -8,6 +8,7 @@ void *routine() {
 	sleep(3);
 	printf("End of threads\n");
 }
+
 int main(int ac, char **av)
 {
 	pthread_t	t1;
@@ -22,5 +23,4 @@ int main(int ac, char **av)
 		return (3);
 	if (pthread_join(t2, NULL) != 0)
 		return (4);
-	return (0);
 }
