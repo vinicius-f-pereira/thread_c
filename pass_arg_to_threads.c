@@ -8,20 +8,22 @@ int	primes[10] = { 2, 3, 5, 7, 11, 13, 17, 19, 23, 29 };
 // the argument of a routine function like void* arg if the 4th arg #include
 // pthread_create function
 void *routine(void *arg) {
-	int	index = *(int*)arg;
-	printf("Primes numbers: %d\n", primes[index]);
+	// int	index = *(int*)arg;
+	// if you want that the number are printed ir order
+	// just pass array in position casting it in create thread function (void*)(primes+i)
+	printf("Primes numbers: %d\n", *(int*)arg);
 	// in this case memory need to be freed here because 
 	// if we free it in for loop, it can be freed before be used by routine function
-	free(arg);
+	// free(arg);
 }
 
 int main(int ac, char **av)
 {
 	pthread_t th[10];
 	for (int i = 0; i < 10; i++) {
-		int *idx = malloc(sizeof(int));
-		*idx = i;
-		if (pthread_create(&th[i], NULL, &routine, idx) != 0) {
+		// int *idx = malloc(sizeof(int));
+		// *idx = i;
+		if (pthread_create(th + i, NULL, &routine, (void*)(primes + i)) != 0) {
 			perror("Failed to create thread");
 		}
 	}
