@@ -39,6 +39,9 @@ int main(int ac, char **av)
 		}
 		printf("Thread %d started\n", i);
 		// function to wait for threads
+	}
+	for (i = 0; i < 4; i++)
+	{
 		if (pthread_join(threads[i], NULL) != 0)
 			return (2);
 		printf("Thread %d finished execution\n", i);
